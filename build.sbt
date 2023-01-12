@@ -1,4 +1,5 @@
 import sbtcrossproject.CrossType
+import sbtghactions.JavaSpec.Distribution
 
 ThisBuild / organization := "io.circe"
 
@@ -24,9 +25,9 @@ val compilerOptionsScala3 = Seq(
   "-language:higherKinds"
 )
 
-val circeVersion = "0.14.1"
+val circeVersion = "0.14.3"
 val monocleLegacyVersion = "2.1.0"
-val monocleVersion = "3.1.0"
+val monocleVersion = "3.2.0"
 val previousCirceOpticsVersion = "0.11.0"
 
 def priorTo3(scalaVersion: String): Boolean =
@@ -41,7 +42,7 @@ def priorTo2_13(scalaVersion: String): Boolean =
     case _                              => false
   }
 
-ThisBuild / crossScalaVersions := Seq("2.12.14", "2.13.6", "3.1.0")
+ThisBuild / crossScalaVersions := Seq("2.12.17", "2.13.10", "3.2.1")
 
 val baseSettings = Seq(
   scalacOptions ++= (
@@ -74,7 +75,6 @@ val baseSettings = Seq(
   coverageEnabled := (
     if (priorTo2_13(scalaVersion.value)) false else coverageEnabled.value
   ),
-  Compile / scalastyleSources ++= (Compile / unmanagedSourceDirectories).value
 )
 
 val allSettings = baseSettings ++ publishSettings
@@ -95,8 +95,8 @@ lazy val optics = crossProject(JSPlatform, JVMPlatform)
       "io.circe" %%% "circe-core" % circeVersion,
       "io.circe" %%% "circe-generic" % circeVersion % Test,
       "io.circe" %%% "circe-testing" % circeVersion % Test,
-      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.10.0" % Test,
-      "org.typelevel" %%% "discipline-scalatest" % "2.1.5" % Test
+      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.11.0" % Test,
+      "org.typelevel" %%% "discipline-scalatest" % "2.2.0" % Test
     ),
     libraryDependencies ++= (
       if (priorTo2_13(scalaVersion.value))
@@ -110,13 +110,11 @@ lazy val optics = crossProject(JSPlatform, JVMPlatform)
           "dev.optics" %%% "monocle-law" % monocleVersion % Test,
         )
     ),
-    ghpagesNoJekyll := true,
     docMappingsApiDir := "api",
-    addMappingsToSiteDir(Compile / packageDoc / mappings, docMappingsApiDir)
   )
   .jsSettings(
     libraryDependencies +=
-      "io.github.cquiroz" %%% "scala-java-time" % "2.3.0" % Test,
+      "io.github.cquiroz" %%% "scala-java-time" % "2.5.0" % Test,
     coverageEnabled := false
   )
 
@@ -157,7 +155,7 @@ lazy val publishSettings = Seq(
   )
 )
 
-ThisBuild / githubWorkflowJavaVersions := Seq("adopt@1.8")
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec(Distribution.Adopt, "8"))
 // No auto-publish atm. Remove this line to generate publish stage
 ThisBuild / githubWorkflowPublishTargetBranches := Seq.empty
 ThisBuild / githubWorkflowBuild := Seq(

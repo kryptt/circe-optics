@@ -80,4 +80,4 @@ trait JsonOptics {
   }
 }
 
-final object JsonOptics extends JsonOptics
+object JsonOptics extends JsonOptics

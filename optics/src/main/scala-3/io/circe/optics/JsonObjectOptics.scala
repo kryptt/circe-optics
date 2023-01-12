@@ -50,4 +50,4 @@ trait JsonObjectOptics extends ListInstances {
   implicit final lazy val jsonObjectIndex: Index[JsonObject, String, Json] = Index.fromAt
 }
 
-final object JsonObjectOptics extends JsonObjectOptics
+object JsonObjectOptics extends JsonObjectOptics
