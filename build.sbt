@@ -2,6 +2,8 @@ import sbtcrossproject.CrossType
 import sbtghactions.JavaSpec.Distribution
 
 ThisBuild / organization := "io.circe"
+ThisBuild / githubOwner := "kryptt"
+ThisBuild / githubRepository := "circe-optics"
 
 val compilerOptionsScala2 = Seq(
   "-deprecation",
@@ -125,24 +127,18 @@ lazy val publishSettings = Seq(
   releaseCrossBuild := true,
   releasePublishArtifactsAction := PgpKeys.publishSigned.value,
   releaseVcsSign := true,
-  homepage := Some(url("https://github.com/circe/circe-optics")),
+  homepage := Some(url("https://github.com/kryptt/circe-optics")),
   licenses := Seq("Apache 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
   publishMavenStyle := true,
   Test / publishArtifact := false,
   pomIncludeRepository := { _ => false },
-  publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (isSnapshot.value)
-      Some("snapshots".at(nexus + "content/repositories/snapshots"))
-    else
-      Some("releases".at(nexus + "service/local/staging/deploy/maven2"))
-  },
+  publishTo := githubPublishTo.value,
   autoAPIMappings := true,
   apiURL := Some(url("https://circe.github.io/circe-optics/api/")),
   scmInfo := Some(
     ScmInfo(
-      url("https://github.com/circe/circe-optics"),
-      "scm:git:git@github.com:circe/circe-optics.git"
+      url("https://github.com/kryptt/circe-optics"),
+      "scm:git:git@github.com:kryptt/circe-optics.git"
     )
   ),
   developers := List(
@@ -151,6 +147,12 @@ lazy val publishSettings = Seq(
       "Travis Brown",
       "travisrobertbrown@gmail.com",
       url("https://twitter.com/travisbrown")
+    ),
+    Developer(
+      "kryptt",
+      "Rodolfo Hansen",
+      "kryptt@gmail.com",
+      url("https://twitter.com/rhansen82")
     )
   )
 )
@@ -181,12 +183,12 @@ lazy val noPublishSettings = Seq(
 
 credentials ++= (
   for {
-    username <- Option(System.getenv().get("SONATYPE_USERNAME"))
-    password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+    username <- Option(System.getenv().get("GITHUB_USERNAME"))
+    token <- Option(System.getenv().get("GITHUB_TOKEN"))
   } yield Credentials(
-    "Sonatype Nexus Repository Manager",
-    "oss.sonatype.org",
+    "Github Package Registry",
+    "maven.pkg.github.com",
     username,
-    password
+    token
   )
 ).toSeq
