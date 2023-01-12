@@ -1,9 +1,11 @@
 # circe-optics
 
-[![Build](https://github.com/circe/circe-optics/workflows/Continuous%20Integration/badge.svg)](https://github.com/circe/circe-optics/actions)
-[![Coverage status](https://img.shields.io/codecov/c/github/circe/circe-optics/master.svg)](https://codecov.io/github/circe/circe-optics)
-[![Gitter](https://img.shields.io/badge/gitter-join%20chat-green.svg)](https://gitter.im/circe/circe)
-[![Maven Central](https://img.shields.io/maven-central/v/io.circe/circe-optics_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/io.circe/circe-optics_2.12)
+[![Build](https://github.com/kryptt/circe-optics/workflows/Continuous%20Integration/badge.svg)](https://github.com/kryptt/circe-optics/actions)
+[![Coverage status](https://img.shields.io/codecov/c/github/kryptt/circe-optics/master.svg)](https://codecov.io/github/kryptt/circe-optics)
+
+I am building my own version of circe-optics in order to start working with scala 3.
+
+For the original code please visit https://github.com/kryptt/circe-optics
 
 This project provides tools for working with JSON values using [circe][circe] and
 [Monocle][monocle]. It was included in the main circe repository until the 0.10.0 release, when
