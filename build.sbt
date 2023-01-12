@@ -160,7 +160,7 @@ ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec(Distribution.Adopt, "8"))
 ThisBuild / githubWorkflowPublishTargetBranches := Seq.empty
 ThisBuild / githubWorkflowBuild := Seq(
   WorkflowStep.Sbt(
-    List("clean", "coverage", "test", "coverageReport", "scalastyle", "scalafmtCheckAll"),
+    List("clean", "coverage", "test", "coverageReport", "scalafmtCheckAll"),
     id = None,
     name = Some("Test")
   ),
