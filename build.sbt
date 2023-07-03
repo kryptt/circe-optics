@@ -27,7 +27,7 @@ val compilerOptionsScala3 = Seq(
   "-language:higherKinds"
 )
 
-val circeVersion = "0.14.3"
+val circeVersion = "0.14.5"
 val monocleLegacyVersion = "2.1.0"
 val monocleVersion = "3.2.0"
 val previousCirceOpticsVersion = "0.11.0"
@@ -44,7 +44,7 @@ def priorTo2_13(scalaVersion: String): Boolean =
     case _                              => false
   }
 
-ThisBuild / crossScalaVersions := Seq("2.12.17", "2.13.10", "3.2.1")
+ThisBuild / crossScalaVersions := Seq("2.12.17", "2.13.10", "3.2.2")
 
 val baseSettings = Seq(
   scalacOptions ++= (

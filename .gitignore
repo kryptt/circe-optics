@@ -11,3 +11,6 @@ tmp/
 .bsp/
 .metals/
 .bloop/
+/.env
+/project/metals.sbt
+/project/project/
